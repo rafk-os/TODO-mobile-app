@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/KotlinProjects/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/drawable/ic_person.xml" value="0.22179487179487178" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout-land/activity_main.xml" value="0.30925925925925923" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout-land/activity_task.xml" value="0.3046875" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout-land/activity_todo.xml" value="0.21516754850088182" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/activity_task.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/activity_todo.xml" value="0.264" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/dropdown_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/fragment_blank.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/modal_error.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinProjects/app/src/main/res/layout/task_item.xml" value="0.4" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
