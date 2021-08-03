@@ -8,10 +8,10 @@ class FakeTaskDao {
     private val tasks = MutableLiveData<List<Task>>()
 
     init {
-        tasks.value= taskList
+        tasks.value = taskList
     }
 
-    fun addTask(task: Task){
+    fun addTask(task: Task) {
         taskList.add(task)
         tasks.value = taskList
 

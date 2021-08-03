@@ -9,21 +9,21 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.ErrorDialogFragment
 import com.example.todolist.R
 import com.example.todolist.data.Task
-import com.example.todolist.utilities.IncjectorUtils
+import com.example.todolist.utilities.InjectorUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TaskActivity : AppCompatActivity() {
+class NewTaskActivity : AppCompatActivity() {
     var cal = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task)
+        setContentView(R.layout.activity_newtask)
         val cancelButton: Button = findViewById(R.id.CancelButton)
         val acceptButton: Button = findViewById(R.id.AcceptButton)
         val taskName: EditText = findViewById(R.id.TaskName)
         val taskDate: EditText = findViewById(R.id.TaskDate)
         val dropDownMenu: AutoCompleteTextView = findViewById(R.id.TaskCategoryMenu)
-        val factory = IncjectorUtils.provideTasksViewModelFactory()
+        val factory = InjectorUtils.provideTasksViewModelFactory()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
         var dialog = ErrorDialogFragment()
         val dateSetListener =  object : DatePickerDialog.OnDateSetListener{
@@ -37,7 +37,7 @@ class TaskActivity : AppCompatActivity() {
 
         taskDate.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View) {
-                DatePickerDialog(this@TaskActivity,dateSetListener, cal.get(Calendar.YEAR
+                DatePickerDialog(this@NewTaskActivity,dateSetListener, cal.get(Calendar.YEAR
                     ),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
 
             }

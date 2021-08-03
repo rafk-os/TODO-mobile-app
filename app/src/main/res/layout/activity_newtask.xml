@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.TaskActivity">
+    tools:context=".ui.NewTaskActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
             android:textStyle="bold"
             android:id="@+id/title"
             android:fontFamily="sans-serif-medium"
-            android:text="Add new task"
+            android:text="@string/toolbar_title_newtask"
             style="@style/Toolbar.TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -33,7 +33,7 @@
         android:layout_marginBottom="5dp"
         android:backgroundTint="#0ec916"
         android:fontFamily="sans-serif-medium"
-        android:text="Accept"
+        android:text="@string/accept_button_text"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -50,7 +50,7 @@
         android:layout_marginBottom="5dp"
         android:backgroundTint="#EA0909"
         android:fontFamily="sans-serif-medium"
-        android:text="Cancel"
+        android:text="@string/decline_button_text"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +64,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:hint="Date"
+        android:hint="@string/hint_date"
         app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +95,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
-        android:hint="Name"
+        android:hint="@string/hint_name"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +120,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.todolist.ui.FirstFragment"
+        android:name="com.example.todolist.ui.DropdownFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"

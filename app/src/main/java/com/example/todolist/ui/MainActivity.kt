@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
 import com.example.todolist.data.Task
-import com.example.todolist.utilities.IncjectorUtils
+import com.example.todolist.utilities.InjectorUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,14 +23,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         val addTaskButton: Button = findViewById(R.id.addTaskButton)
-         val listView: RecyclerView = findViewById(R.id.taskView)
+        val addTaskButton: Button = findViewById(R.id.addTaskButton)
+        val listView: RecyclerView = findViewById(R.id.taskView)
 
         listView.adapter = adapter
         listView.layoutManager = LinearLayoutManager(this)
         listView.setHasFixedSize(true)
 
-        val factory = IncjectorUtils.provideTasksViewModelFactory()
+        val factory = InjectorUtils.provideTasksViewModelFactory()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
         viewModel.getTasks().observe(this, Observer { tasks ->
             if (tasks.isNotEmpty()) {
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         addTaskButton.setOnClickListener() {
 
-            val intent = Intent(this, TaskActivity::class.java)
+            val intent = Intent(this, NewTaskActivity::class.java)
 
             startActivity(intent)
 
@@ -55,11 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val noTaskView : TextView = findViewById(R.id.noTaskText)
-        if(testList.isEmpty()) {
+        val noTaskView: TextView = findViewById(R.id.noTaskText)
+        if (testList.isEmpty()) {
             noTaskView.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             noTaskView.visibility = View.GONE
 
         }

@@ -13,12 +13,12 @@ class ErrorDialogFragment : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val rootView: View = inflater.inflate(R.layout.modal_error,container,false)
-        val acceptButton : Button = rootView.findViewById(R.id.acceptButton)
-        val declineButton : Button = rootView.findViewById(R.id.declineButton)
+    ): View {
+        val rootView: View = inflater.inflate(R.layout.modal_error, container, false)
+        val acceptButton: Button = rootView.findViewById(R.id.acceptButton)
+        val declineButton: Button = rootView.findViewById(R.id.declineButton)
 
-        acceptButton.setOnClickListener{
+        acceptButton.setOnClickListener {
             dismiss()
         }
 

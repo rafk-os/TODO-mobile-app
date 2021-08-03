@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_first_scene"
-    tools:context=".ui.FirstFragment">
+    tools:context=".ui.DropdownFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -17,7 +17,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:hint="Category"
+        android:hint="@string/hint_category"
         app:startIconDrawable="@drawable/ic_baseline_category_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Select a Category"
+            android:text="@string/input_category_text"
             android:textColor="#757575" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.motion.widget.MotionLayout>
