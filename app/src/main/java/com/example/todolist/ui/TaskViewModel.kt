@@ -10,4 +10,6 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     fun getTasks() = taskRepository.getTasks()
 
     fun addTask(task: Task) = taskRepository.addTask(task)
+
+    fun isThere(task: Task): Boolean = taskRepository.isThere(task)
 }

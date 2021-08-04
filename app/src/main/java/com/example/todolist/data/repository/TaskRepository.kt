@@ -10,6 +10,8 @@ class TaskRepository private constructor(private val taskDao: FakeTaskDao) {
 
     fun getTasks() = taskDao.getTask()
 
+    fun isThere(task: Task) : Boolean = taskDao.isThere(task)
+
     companion object {
         @Volatile
         private var instance: TaskRepository? = null

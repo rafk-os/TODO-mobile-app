@@ -18,5 +18,9 @@ class FakeTaskDao {
 
     }
 
+    fun isThere(task: Task): Boolean {
+        return taskList.contains(task)
+    }
+
     fun getTask() = tasks as LiveData<List<Task>>
 }
