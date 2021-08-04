@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NewTaskActivity">
+    tools:context=".ui.activities.NewTaskActivity">
 
     <Button
         android:id="@+id/AcceptButton"
@@ -121,7 +121,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.todolist.ui.DropdownFragment"
+        android:name="com.example.todolist.ui.fragments.DropdownFragment"
         android:layout_width="405dp"
         android:layout_height="87dp"
         android:layout_marginStart="10dp"

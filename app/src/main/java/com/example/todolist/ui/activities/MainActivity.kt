@@ -1,4 +1,4 @@
-package com.example.todolist.ui
+package com.example.todolist.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+//import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
-import com.example.todolist.data.Task
+import com.example.todolist.data.model.Task
+import com.example.todolist.ui.TaskViewModel
+import com.example.todolist.ui.adapters.ListAdapter
 import com.example.todolist.utilities.InjectorUtils
 
 
@@ -30,9 +32,10 @@ class MainActivity : AppCompatActivity() {
         listView.layoutManager = LinearLayoutManager(this)
         listView.setHasFixedSize(true)
 
+
         val factory = InjectorUtils.provideTasksViewModelFactory()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
-        viewModel.getTasks().observe(this, Observer { tasks ->
+        viewModel.getTasks().observe(this, { tasks ->
             if (tasks.isNotEmpty()) {
                 testList.clear()
                 tasks.forEach {
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyItemInserted(tasks.size - 1)
         })
 
-        addTaskButton.setOnClickListener() {
+        addTaskButton.setOnClickListener {
 
             val intent = Intent(this, NewTaskActivity::class.java)
 
@@ -56,12 +59,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val noTaskView: TextView = findViewById(R.id.noTaskText)
-        if (testList.isEmpty()) {
-            noTaskView.visibility = View.VISIBLE
-        } else {
-            noTaskView.visibility = View.GONE
+        if (testList.isEmpty()) noTaskView.visibility = View.VISIBLE
+        else noTaskView.visibility = View.GONE
 
-        }
+
     }
 
 }

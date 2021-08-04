@@ -2,7 +2,7 @@ package com.example.todolist.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.todolist.data.TaskRepository
+import com.example.todolist.data.repository.TaskRepository
 
 class TaskViewModelFactory(private val taskRepository: TaskRepository) :
     ViewModelProvider.NewInstanceFactory() {

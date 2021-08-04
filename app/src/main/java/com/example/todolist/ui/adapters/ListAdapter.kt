@@ -1,4 +1,4 @@
-package com.example.todolist.ui
+package com.example.todolist.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
-import com.example.todolist.data.Task
+import com.example.todolist.data.model.Task
 
 
 class ListAdapter(private val taskList: List<Task>) :

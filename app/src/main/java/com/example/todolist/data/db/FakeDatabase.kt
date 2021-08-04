@@ -1,4 +1,4 @@
-package com.example.todolist.data
+package com.example.todolist.data.db
 
 class FakeDatabase private constructor() {
 

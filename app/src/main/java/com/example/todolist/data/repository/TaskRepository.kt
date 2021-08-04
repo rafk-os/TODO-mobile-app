@@ -1,4 +1,7 @@
-package com.example.todolist.data
+package com.example.todolist.data.repository
+
+import com.example.todolist.data.db.FakeTaskDao
+import com.example.todolist.data.model.Task
 
 class TaskRepository private constructor(private val taskDao: FakeTaskDao) {
     fun addTask(task: Task) {

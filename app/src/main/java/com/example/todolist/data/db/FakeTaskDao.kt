@@ -1,7 +1,8 @@
-package com.example.todolist.data
+package com.example.todolist.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.todolist.data.model.Task
 
 class FakeTaskDao {
     private val taskList = mutableListOf<Task>()

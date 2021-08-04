@@ -1,4 +1,4 @@
-package com.example.todolist.data
+package com.example.todolist.data.model
 
 data class Task(val taskName: String, val taskDate: String, val taskCategory: String) {
     override fun toString(): String {

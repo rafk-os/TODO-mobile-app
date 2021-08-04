@@ -1,8 +1,8 @@
 package com.example.todolist.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.todolist.data.Task
-import com.example.todolist.data.TaskRepository
+import com.example.todolist.data.model.Task
+import com.example.todolist.data.repository.TaskRepository
 
 class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 

@@ -1,20 +1,22 @@
-package com.example.todolist.ui
+package com.example.todolist.ui.activities
 
+//import android.view.View
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.todolist.ErrorDialogFragment
 import com.example.todolist.R
-import com.example.todolist.data.Task
+import com.example.todolist.data.model.Task
+import com.example.todolist.ui.TaskViewModel
+import com.example.todolist.ui.fragments.ErrorDialogFragment
 import com.example.todolist.utilities.InjectorUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NewTaskActivity : AppCompatActivity() {
-    var cal = Calendar.getInstance()
+    private var cal = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newtask)
@@ -25,34 +27,36 @@ class NewTaskActivity : AppCompatActivity() {
         val dropDownMenu: AutoCompleteTextView = findViewById(R.id.TaskCategoryMenu)
         val factory = InjectorUtils.provideTasksViewModelFactory()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
-        var dialog = ErrorDialogFragment()
-        val dateSetListener =  object : DatePickerDialog.OnDateSetListener{
-            override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-                cal.set(Calendar.YEAR,year)
-                cal.set(Calendar.MONTH,monthOfYear)
-                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+        val dialog = ErrorDialogFragment()
+
+
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateDateinView()
             }
+
+        taskDate.setOnClickListener {
+            DatePickerDialog(
+                this@NewTaskActivity, dateSetListener, cal.get(
+                    Calendar.YEAR
+                ), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
-        taskDate.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(view: View) {
-                DatePickerDialog(this@NewTaskActivity,dateSetListener, cal.get(Calendar.YEAR
-                    ),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
 
-            }
-
-        })
-
-
-        cancelButton.setOnClickListener() {
+        cancelButton.setOnClickListener {
             finish()
         }
 
 
-        acceptButton.setOnClickListener() {
+        acceptButton.setOnClickListener {
 
-            if ( taskName.text.toString().isNotEmpty() && taskDate.text.toString().isNotEmpty() && dropDownMenu.text.toString() != "Select a Category"){
+            if (taskName.text.toString().isNotEmpty() && taskDate.text.toString()
+                    .isNotEmpty() && dropDownMenu.text.toString() != "Select a Category"
+            ) {
                 val newTask = Task(
                     taskName.text.toString(),
                     taskDate.text.toString(),
@@ -61,18 +65,17 @@ class NewTaskActivity : AppCompatActivity() {
                 viewModel.addTask(newTask)
                 Toast.makeText(this, "New task has been added", Toast.LENGTH_LONG).show()
                 finish()
-            }
-            else{
-                dialog.show(supportFragmentManager,"errorDialog")
-            }
+            } else dialog.show(supportFragmentManager, "errorDialog")
+
 
         }
 
     }
-    private fun updateDateinView(){
+
+    private fun updateDateinView() {
         val taskDate: EditText = findViewById(R.id.TaskDate)
         val format = "dd MMMM yyyy"
-        val sdf = SimpleDateFormat(format,Locale.getDefault())
+        val sdf = SimpleDateFormat(format, Locale.getDefault())
         taskDate.setText(sdf.format(cal.time))
 
     }
