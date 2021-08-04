@@ -15,11 +15,19 @@ import com.example.todolist.R
 import com.example.todolist.data.PrefConfig
 import com.example.todolist.data.model.Task
 import com.example.todolist.ui.TaskViewModel
+import com.example.todolist.ui.TaskViewModelFactory
 import com.example.todolist.ui.adapters.ListAdapter
-import com.example.todolist.utilities.InjectorUtils
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+
+    override val kodein by closestKodein()
+
+
     private var testList = ArrayList<Task>()
     private val adapter = ListAdapter(testList)
 
@@ -31,9 +39,8 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
         listView.layoutManager = LinearLayoutManager(this)
         listView.setHasFixedSize(true)
-
         val prefConfig = PrefConfig()
-        val factory = InjectorUtils.provideTasksViewModelFactory()
+        val factory: TaskViewModelFactory by instance()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
 
         val  prefData = prefConfig.readListFromPref(applicationContext)

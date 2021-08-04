@@ -9,13 +9,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.R
 import com.example.todolist.data.model.Task
 import com.example.todolist.ui.TaskViewModel
+import com.example.todolist.ui.TaskViewModelFactory
 import com.example.todolist.ui.fragments.ErrorDialogFragment
-import com.example.todolist.utilities.InjectorUtils
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NewTaskActivity : AppCompatActivity() {
+class NewTaskActivity : AppCompatActivity(), KodeinAware {
+    override val kodein by closestKodein()
     private var cal = Calendar.getInstance()
+    private val factory: TaskViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +30,6 @@ class NewTaskActivity : AppCompatActivity() {
         val taskName: EditText = findViewById(R.id.TaskName)
         val taskDate: EditText = findViewById(R.id.TaskDate)
         val dropDownMenu: AutoCompleteTextView = findViewById(R.id.TaskCategoryMenu)
-        val factory = InjectorUtils.provideTasksViewModelFactory()
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
         val dialog = ErrorDialogFragment()
 

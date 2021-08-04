@@ -17,7 +17,7 @@
     <string name="input_category_text">Select a Category</string>
     <string name="example_text">Helo</string>
     <string name="toolbar_title_newtask">Add new task</string>
-    <string name="accept_button_text">Accept</string>
+    <string name="accept_button_text">Add task</string>
     <string name="decline_button_text">Cancel</string>
     <string name="hint_date">Date</string>
     <string name="hint_name">Name</string>

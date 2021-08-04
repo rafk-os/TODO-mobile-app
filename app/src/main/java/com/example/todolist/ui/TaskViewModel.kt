@@ -7,7 +7,7 @@ import com.example.todolist.data.repository.TaskRepository
 class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
 
-    fun getTasks() = taskRepository.getTasks()
+    fun getTasks() = taskRepository.getTask()
 
     fun addTask(task: Task) = taskRepository.addTask(task)
 
