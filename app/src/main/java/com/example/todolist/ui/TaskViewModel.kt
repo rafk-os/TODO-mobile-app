@@ -1,15 +1,15 @@
 package com.example.todolist.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.todolist.data.db.FakeTaskDao
 import com.example.todolist.data.model.Task
-import com.example.todolist.data.repository.TaskRepository
 
-class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
+class TaskViewModel(private val taskDao: FakeTaskDao) : ViewModel() {
 
 
-    fun getTasks() = taskRepository.getTask()
+    fun getTasks(context: Context) = taskDao.getTask(context)
 
-    fun addTask(task: Task) = taskRepository.addTask(task)
+    fun addTask(context: Context, task: Task) = taskDao.addTask(context, task)
 
-    fun isThere(task: Task): Boolean = taskRepository.isThere(task)
 }

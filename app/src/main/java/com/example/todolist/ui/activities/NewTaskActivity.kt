@@ -1,13 +1,13 @@
 package com.example.todolist.ui.activities
 
-//import android.view.View
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.todolist.R
 import com.example.todolist.data.model.Task
+import com.example.todolist.databinding.ActivityNewtaskBinding
+import com.example.todolist.ui.DropdownViewModel
 import com.example.todolist.ui.TaskViewModel
 import com.example.todolist.ui.TaskViewModelFactory
 import com.example.todolist.ui.fragments.ErrorDialogFragment
@@ -19,30 +19,39 @@ import java.util.*
 
 class NewTaskActivity : AppCompatActivity(), KodeinAware {
     override val kodein by closestKodein()
-    private var cal = Calendar.getInstance()
+    private lateinit var binding: ActivityNewtaskBinding
+    private val cal = Calendar.getInstance()
     private val factory: TaskViewModelFactory by instance()
+    private val dialog = ErrorDialogFragment()
+    private val dateSetListener =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            binding.TaskDate.setText(sdf.format(cal.time))
+        }
+    private val taskDateFormat = "dd MMMM yyyy"
+    private val sdf = SimpleDateFormat(taskDateFormat, Locale.getDefault())
+    private val toastText = "New task has been added"
+    private val dialogTag = "errorDialog"
+    private var dropdownViewModel = DropdownViewModel()
+    private var dropdownText = "Select a Category"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_newtask)
-        val cancelButton: Button = findViewById(R.id.CancelButton)
-        val acceptButton: Button = findViewById(R.id.AcceptButton)
-        val taskName: EditText = findViewById(R.id.TaskName)
-        val taskDate: EditText = findViewById(R.id.TaskDate)
-        val dropDownMenu: AutoCompleteTextView = findViewById(R.id.TaskCategoryMenu)
+        binding = ActivityNewtaskBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
-        val dialog = ErrorDialogFragment()
+
+        dropdownViewModel = ViewModelProvider(this).get(DropdownViewModel::class.java)
+        dropdownViewModel.getData().observe(this, { item -> dropdownText = item })
 
 
-        val dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, monthOfYear)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateinView()
-            }
 
-        taskDate.setOnClickListener {
+        binding.TaskDate.setOnClickListener {
             DatePickerDialog(
                 this@NewTaskActivity, dateSetListener, cal.get(
                     Calendar.YEAR
@@ -51,37 +60,30 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
         }
 
 
-        cancelButton.setOnClickListener {
+        binding.CancelButton.setOnClickListener {
             finish()
         }
 
 
-        acceptButton.setOnClickListener {
 
-            if (taskName.text.toString().isNotEmpty() && taskDate.text.toString()
-                    .isNotEmpty() && dropDownMenu.text.toString() != "Select a Category"
+        binding.AcceptButton.setOnClickListener {
+
+            if (binding.TaskName.text.toString().isNotEmpty() && binding.TaskDate.text.toString()
+                    .isNotEmpty() && dropdownText != "Select a Category"
             ) {
-                val newTask = Task(
-                    taskName.text.toString(),
-                    taskDate.text.toString(),
-                    dropDownMenu.text.toString()
+                viewModel.addTask(
+                    this,
+                    Task(
+                        binding.TaskName.text.toString(),
+                        binding.TaskDate.text.toString(),
+                        dropdownText
+                    )
                 )
-                viewModel.addTask(newTask)
-                Toast.makeText(this, "New task has been added", Toast.LENGTH_LONG).show()
-                finish()
-            } else dialog.show(supportFragmentManager, "errorDialog")
 
+                Toast.makeText(this, toastText, Toast.LENGTH_LONG).show()
+                finish()
+            } else dialog.show(supportFragmentManager, dialogTag)
 
         }
-
     }
-
-    private fun updateDateinView() {
-        val taskDate: EditText = findViewById(R.id.TaskDate)
-        val format = "dd MMMM yyyy"
-        val sdf = SimpleDateFormat(format, Locale.getDefault())
-        taskDate.setText(sdf.format(cal.time))
-
-    }
-
 }
