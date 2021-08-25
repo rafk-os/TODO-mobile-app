@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
 import com.example.todolist.data.model.Task
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ListAdapter(private val taskList: List<Task>) :
@@ -25,8 +27,13 @@ class ListAdapter(private val taskList: List<Task>) :
     override fun onBindViewHolder(holder: BasicViewHolder, position: Int) {
         val currentItem = taskList[position]
 
+        val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        val netDate = Date(currentItem.taskDate)
+        val date = sdf.format(netDate)
+
+
         holder.nameTextView.text = currentItem.taskName
-        holder.dateTextView.text = currentItem.taskDate
+        holder.dateTextView.text = date.toString()
         holder.categoryTextView.text = currentItem.taskCategory
 
 

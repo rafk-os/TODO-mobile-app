@@ -71,11 +71,15 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
             if (binding.TaskName.text.toString().isNotEmpty() && binding.TaskDate.text.toString()
                     .isNotEmpty() && dropdownText != "Select a Category"
             ) {
+
+                val date: Date? = sdf.parse(binding.TaskDate.text.toString())
+
+
                 viewModel.addTask(
                     this,
                     Task(
                         binding.TaskName.text.toString(),
-                        binding.TaskDate.text.toString(),
+                        date?.time ?: 1,
                         dropdownText
                     )
                 )
