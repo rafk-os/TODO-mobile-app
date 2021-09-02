@@ -16,6 +16,7 @@ class DataAccessImplementation : DataAccess {
     private val filename = "tasks"
 
 
+    // zapis danych w postaci stringu do pliku aplikacji
     override fun saveData(context: Context, list: MutableList<Task>) {
 
         val file = File(context.filesDir, filename)
@@ -33,6 +34,7 @@ class DataAccessImplementation : DataAccess {
 
     }
 
+    // odczyt danych w postaci stringu do pliku aplikacji
     override fun readData(context: Context): MutableList<Task> {
 
         val file = File(context.filesDir, filename)

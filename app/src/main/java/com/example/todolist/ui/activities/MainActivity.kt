@@ -18,6 +18,7 @@ import org.kodein.di.generic.instance
 
 class MainActivity : AppCompatActivity(), KodeinAware {
 
+
     override val kodein by closestKodein()
     private lateinit var binding: ActivityMainBinding
     private var taskList = ArrayList<Task>()
@@ -27,15 +28,22 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // view binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.taskView.adapter = adapter
         binding.taskView.layoutManager = LinearLayoutManager(this)
         binding.taskView.setHasFixedSize(true)
 
 
+        // view model i intent tworzenie
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
         val newTaskIntent = Intent(this, NewTaskActivity::class.java)
+
+
+        //  obserwacja listy zadań
 
         viewModel.getTasks(this).observe(this, { tasks ->
             if (tasks.isNotEmpty()) {
@@ -53,6 +61,9 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
 
     }
+
+    /* ukrywanie oraz pokazywanie
+    napisu o braku zadań */
 
     override fun onResume() {
         super.onResume()

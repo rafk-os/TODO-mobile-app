@@ -23,6 +23,8 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
     private val cal = Calendar.getInstance()
     private val factory: TaskViewModelFactory by instance()
     private val dialog = ErrorDialogFragment()
+
+    // stworzenie listenera do kalendarza
     private val dateSetListener =
         DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
@@ -30,6 +32,7 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             binding.TaskDate.setText(sdf.format(cal.time))
         }
+
     private val taskDateFormat = "dd MMMM yyyy"
     private val sdf = SimpleDateFormat(taskDateFormat, Locale.getDefault())
     private val toastText = "New task has been added"
@@ -40,17 +43,21 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // view binding
         binding = ActivityNewtaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
         val viewModel = ViewModelProvider(this, factory).get(TaskViewModel::class.java)
 
+
+        // przygotowanie dropdown fragmentu
         dropdownViewModel = ViewModelProvider(this).get(DropdownViewModel::class.java)
         dropdownViewModel.getData().observe(this, { item -> dropdownText = item })
 
 
-
+        // przygotowanie kalendarza
         binding.TaskDate.setOnClickListener {
             DatePickerDialog(
                 this@NewTaskActivity, dateSetListener, cal.get(
@@ -60,12 +67,13 @@ class NewTaskActivity : AppCompatActivity(), KodeinAware {
         }
 
 
+        // cancel button listener
         binding.CancelButton.setOnClickListener {
             finish()
         }
 
 
-
+        // accept button listener
         binding.AcceptButton.setOnClickListener {
 
             if (binding.TaskName.text.toString().isNotEmpty() && binding.TaskDate.text.toString()
