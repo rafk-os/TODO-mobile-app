@@ -1,2 +1,2 @@
 # TODO-mobile-app
-Aplikacja mobilna listy TODO wykonana w języku kotlin.
+Aplikacja mobilna na androida która spełnia zadanie listy TODO.
